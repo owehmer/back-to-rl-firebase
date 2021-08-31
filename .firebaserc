@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "back-to-rl": {
+      "hosting": {
+        "back-to-rl": [
+          "back-to-rl"
+        ]
+      }
+    }
+  }
+}
