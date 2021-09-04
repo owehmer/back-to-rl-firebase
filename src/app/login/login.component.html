@@ -1,1 +1,19 @@
-<p>login works!</p>
+<mat-toolbar>Back to Real Life!</mat-toolbar>
+
+<div class="login-wrapper mat-elevation-z1">
+  <h2>Login</h2>
+
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-placeholder>Email</mat-placeholder>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-placeholder>Password</mat-placeholder>
+      <input matInput formControlName="password" type="password">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="login()">Login</button>
+  </form>
+</div>
