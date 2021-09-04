@@ -20,6 +20,8 @@ import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './entity-metadata';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { EffectsModule } from '@ngrx/effects';
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-    })
+    }),
+    EntityDataModule.forRoot(entityConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
