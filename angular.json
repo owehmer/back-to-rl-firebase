@@ -113,5 +113,8 @@
       }
     }
   },
-  "defaultProject": "back-to-rl"
+  "defaultProject": "back-to-rl",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
