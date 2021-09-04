@@ -116,5 +116,10 @@
   "defaultProject": "back-to-rl",
   "cli": {
     "defaultCollection": "@ngrx/schematics"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "displayBlock": true
+    }
   }
 }

@@ -22,6 +22,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
+import { RouterModule } from '@angular/router';
+import { AppRoutesModule } from './app-routes.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { entityConfig } from './entity-metadata';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
@@ -50,7 +54,9 @@ import { entityConfig } from './entity-metadata';
       logOnly: environment.production, // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
-    EntityDataModule.forRoot(entityConfig)
+    EntityDataModule.forRoot(entityConfig),
+    RouterModule,
+    AppRoutesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
