@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
 
 export const BASE_ROUTES: Routes = [
   {
@@ -7,6 +8,14 @@ export const BASE_ROUTES: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./klienten-uebersicht/klienten-uebersicht.module').then((m) => m.KlientenUebersichtModule)
+    loadChildren: () => import('./klienten-uebersicht/klienten-uebersicht.module').then((m) => m.KlientenUebersichtModule),
+    canActivate: [AngularFireAuthGuard],
+    data: {
+      authGuardPipe: () => redirectUnauthorizedTo('login')
+    }
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];

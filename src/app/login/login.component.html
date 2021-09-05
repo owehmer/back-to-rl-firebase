@@ -1,6 +1,7 @@
 <mat-toolbar>Back to Real Life!</mat-toolbar>
 
 <div class="login-wrapper mat-elevation-z1">
+  <mat-progress-bar *ngIf="isLoggingIn" mode="indeterminate" class="login-progress-bar"></mat-progress-bar>
   <h2>Login</h2>
 
   <form [formGroup]="form">
