@@ -29,6 +29,8 @@
     "firebase": "^9.0.0",
     "rxfire": "^6.0.0",
     "rxjs": "~6.6.0",
+    "ts-action": "^11.0.0",
+    "ts-action-immer": "^3.0.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
