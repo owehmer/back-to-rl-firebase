@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,33 @@ export class LoginComponent implements OnInit {
     password: new FormControl()
   });
 
-  constructor() {
+  constructor(public auth: AngularFireAuth) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.auth.signOut();
   }
 
   login() {
-    console.warn(this.form.getRawValue());
+    const { email, password } = this.form.getRawValue();
+    this.auth.signInWithEmailAndPassword(email, password)
+      .then(credentials => {
+        console.warn('SUCCESS', credentials);
+      }).catch(error => {
+      let errorMsg = 'Unbekannter Fehler';
+      switch (error.code) {
+        case 'auth/wrong-password': {
+          errorMsg = 'Benutzername oder Passwort falsch';
+          break;
+        }
+        case 'auth/invalid-email': {
+          errorMsg = 'E-Mail falsch formatiert';
+          break;
+        }
+      }
+      this.form.controls.email.setErrors({
+        credentials: errorMsg
+      })
+    });
   }
 }

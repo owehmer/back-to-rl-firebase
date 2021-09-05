@@ -14,6 +14,7 @@ import { entityConfig } from './entity-metadata';
 import { RouterModule } from '@angular/router';
 import { AppRoutesModule } from './app-routes.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PERSISTENCE } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     AppRoutesModule
   ],
-  providers: [],
+  providers: [
+    { provide: PERSISTENCE, useValue: 'local' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

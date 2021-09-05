@@ -7,6 +7,10 @@
     <mat-form-field>
       <mat-placeholder>Email</mat-placeholder>
       <input matInput formControlName="email">
+
+      <mat-error *ngIf="form.controls.email.hasError('credentials')">
+        {{form.controls.email.getError('credentials')}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
