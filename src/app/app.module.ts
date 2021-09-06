@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutesModule } from './app-routes.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PERSISTENCE } from '@angular/fire/compat/auth';
+import { KlientenStateModule } from './+klienten/state/klienten-state.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PERSISTENCE } from '@angular/fire/compat/auth';
     }),
     EntityDataModule.forRoot(entityConfig),
     RouterModule,
-    AppRoutesModule
+    AppRoutesModule,
+    KlientenStateModule
   ],
   providers: [
     { provide: PERSISTENCE, useValue: 'local' },

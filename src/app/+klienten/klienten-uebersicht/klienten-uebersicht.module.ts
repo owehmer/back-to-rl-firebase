@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KlientenUebersichtComponent } from './klienten-uebersicht.component';
 import { RouterModule } from '@angular/router';
-import { LandingPageComponent } from '../landing-page/landing-page.component';
-import { LandingPageModule } from '../landing-page/landing-page.module';
+import { LandingPageComponent } from '../../landing-page/landing-page.component';
+import { LandingPageModule } from '../../landing-page/landing-page.module';
 
 
 @NgModule({

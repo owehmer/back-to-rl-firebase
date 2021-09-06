@@ -8,7 +8,7 @@ export const BASE_ROUTES: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./klienten-uebersicht/klienten-uebersicht.module').then((m) => m.KlientenUebersichtModule),
+    loadChildren: () => import('./+klienten/klienten-uebersicht/klienten-uebersicht.module').then((m) => m.KlientenUebersichtModule),
     canActivate: [AngularFireAuthGuard],
     data: {
       authGuardPipe: () => redirectUnauthorizedTo('login')
