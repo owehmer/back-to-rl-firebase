@@ -1,10 +1,11 @@
 :host {
   display: grid;
-  grid-template-columns: fit-content(300px);
-  grid-template-rows: auto;
+
+  grid-template-columns: repeat(auto-fit, 300px);
+  grid-gap: 16px;
+
 }
 
 .klienten-card {
-  width: 300px;
   max-height: 150px;
 }

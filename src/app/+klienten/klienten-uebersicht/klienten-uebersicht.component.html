@@ -4,7 +4,7 @@
          [alt]="klient.vorname + ' ' + klient.name + ' Portrait'">
 
     <mat-card-title>{{klient.vorname}} {{klient.name}}</mat-card-title>
-    <mat-card-subtitle>{{klient.geburtsdatum | firestoreDate}}</mat-card-subtitle>
+    <mat-card-subtitle>{{klient.geburtsdatum | firestoreDate : 'dd.MM.YYYY'}}</mat-card-subtitle>
   </mat-card-header>
 </mat-card>
 
