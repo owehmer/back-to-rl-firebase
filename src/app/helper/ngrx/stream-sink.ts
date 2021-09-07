@@ -1,9 +1,8 @@
 import { Dictionary } from '@ngrx/entity';
 import { Observable, OperatorFunction, pipe, Subject } from 'rxjs';
 import { NonNull } from '../assert/not-null';
-import { ActionCreator, Store } from '@ngrx/store';
+import { ActionCreator, Selector, Store } from '@ngrx/store';
 import { Action } from 'ts-action';
-import { MemoizedSelector } from '@ngrx/store/src/selector';
 import { Injectable } from '@angular/core';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ofType } from '@ngrx/effects';
@@ -22,7 +21,7 @@ export class SinkObj<TState = unknown, TResult = unknown> {
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(public actionName: string,
-              public storeSelektor: MemoizedSelector<TState, TResult>) {
+              public storeSelektor: Selector<TState, TResult>) {
   }
 
   fuegeListenerHinzu() {
@@ -41,7 +40,7 @@ export class SinkObj<TState = unknown, TResult = unknown> {
 
 
 @Injectable({ providedIn: 'root' })
-export class StreamSink<TState = unknown> {
+export class StreamSink<TState = any> {
   private _selektorMetas: Dictionary<SinkObj<TState, any>> = {};
 
   constructor(protected _ngrxStore: Store<TState>,
@@ -61,7 +60,10 @@ export class StreamSink<TState = unknown> {
     )
   }
 
-  starteStream$<TSelektorResult, TAction extends Action, TSelektor extends MemoizedSelector<TState, TSelektorResult>>(actionFn: () => TAction, storeSelektor: TSelektor) {
+  starteStream$<TSelektorResult, TAction extends Action>(
+    actionFn: () => TAction,
+    storeSelektor: Selector<TState, TSelektorResult>
+  ) {
     const action = actionFn() as Action;
     const sinkObj = this._holeOderErstelleSink(action.type, storeSelektor);
     sinkObj.fuegeListenerHinzu();
@@ -99,7 +101,7 @@ export class StreamSink<TState = unknown> {
    * @param storeSelektor
    * @private
    */
-  private _holeOderErstelleSink<TSelektor extends MemoizedSelector<TState, TSelektorResult>, TSelektorResult = any>(name: string, storeSelektor: TSelektor) {
+  private _holeOderErstelleSink<TSelektor extends Selector<TState, TSelektorResult>, TSelektorResult>(name: string, storeSelektor: TSelektor) {
     if (this._selektorMetas[name] == null) {
       this._selektorMetas[name] = new SinkObj(name, storeSelektor);
     }

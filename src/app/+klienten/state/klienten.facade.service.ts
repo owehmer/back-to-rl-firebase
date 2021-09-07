@@ -7,15 +7,16 @@ import * as actions from './klienten.actions';
 @Injectable({
   providedIn: 'root'
 })
-export class KlientenFacadeService extends StreamSink {
-  alleKlienten$ = this._ngrxStore.select(selectors.alleKlienten);
+export class KlientenFacadeService {
 
-  constructor(_store: Store) {
-    super(_store);
+  constructor(private _store: Store,
+              private _sink: StreamSink) {
   }
 
   gibAlleKlienten$(idFilter?: string[]) {
-    return this._subscribeSelektor(() => actions.KlientenLaden.request({ idFilter }), selectors.alleKlienten);
+    const a = selectors.alleKlienten;
+    const b = this._sink.starteStream$(() => actions.KlientenLaden.request({ idFilter }), a);
+
   }
 
   stoppeAlleKlientenAnzeigen() {
