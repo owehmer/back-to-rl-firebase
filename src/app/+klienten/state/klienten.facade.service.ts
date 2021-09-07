@@ -8,7 +8,7 @@ import * as actions from './klienten.actions';
   providedIn: 'root'
 })
 export class KlientenFacadeService extends StreamSink {
-  alleKlienten$ = this._store.select(selectors.alleKlienten);
+  alleKlienten$ = this._ngrxStore.select(selectors.alleKlienten);
 
   constructor(_store: Store) {
     super(_store);
