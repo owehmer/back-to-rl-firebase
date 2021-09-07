@@ -16,15 +16,13 @@ export class KlientenUebersichtComponent implements OnInit {
     }))
   );
 
-  start = true;
-
   constructor(private _klientenFacade: KlientenFacadeService) {
   }
 
   ngOnInit(): void {
   }
 
-  stopSub() {
+  ngOnDestroy() {
     this._klientenFacade.stoppeAlleKlientenAnzeigen();
   }
 

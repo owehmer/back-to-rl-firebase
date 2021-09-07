@@ -1,3 +1,10 @@
 :host {
-  display: block;
+  display: grid;
+  grid-template-columns: fit-content(300px);
+  grid-template-rows: auto;
+}
+
+.klienten-card {
+  width: 300px;
+  max-height: 150px;
 }

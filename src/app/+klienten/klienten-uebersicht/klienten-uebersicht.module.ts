@@ -4,6 +4,8 @@ import { KlientenUebersichtComponent } from './klienten-uebersicht.component';
 import { RouterModule } from '@angular/router';
 import { LandingPageComponent } from '../../landing-page/landing-page.component';
 import { LandingPageModule } from '../../landing-page/landing-page.module';
+import { MatCardModule } from '@angular/material/card';
+import { FirestoreDateModule } from '../../helper/date/firestore-date/firestore-date.module';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { LandingPageModule } from '../../landing-page/landing-page.module';
         path: '**',
         redirectTo: ''
       }
-    ])
+    ]),
+    MatCardModule,
+    FirestoreDateModule
   ]
 })
 export class KlientenUebersichtModule {

@@ -17,7 +17,7 @@ export const initialState: KlientState = adapter.getInitialState({
     '1': {
       id: '1',
       geburtsdatum: new Date(),
-      nachname: 'test',
+      name: 'test',
       vorname: 'asd'
     },
   },

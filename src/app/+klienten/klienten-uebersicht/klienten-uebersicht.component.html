@@ -1,5 +1,10 @@
-<div *ngFor="let klient of klienten$ | async">
-  {{klient | json}}
-</div>
+<mat-card *ngFor="let klient of (klienten$ | async)" class="klienten-card">
+  <mat-card-header>
+    <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+         [alt]="klient.vorname + ' ' + klient.name + ' Portrait'">
 
-<button (click)="stopSub()">STOP!</button>
+    <mat-card-title>{{klient.vorname}} {{klient.name}}</mat-card-title>
+    <mat-card-subtitle>{{klient.geburtsdatum | firestoreDate}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+
