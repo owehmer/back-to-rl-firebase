@@ -2,7 +2,7 @@ import { action, fsa } from 'ts-action';
 
 export function ActionGenerator<TRequest = void,
   TResult = void,
-  TError = void,
+  TError = any,
   TRequestMeta = void,
   TResultMeta = void,
   TErrorMeta = void,
