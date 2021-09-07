@@ -2,11 +2,4 @@
   {{klient | json}}
 </div>
 
-<button (click)="startSub()">START!</button>
 <button (click)="stopSub()">STOP!</button>
-
-<ng-container *ngIf="start">
-  <div *ngFor="let sKlient of storeObs$ | async">
-    {{sKlient | json}}
-  </div>
-</ng-container>

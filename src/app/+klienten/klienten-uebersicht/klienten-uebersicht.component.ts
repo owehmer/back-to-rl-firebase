@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KlientenFacadeService } from '../state/klienten.facade.service';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { NonNull } from '../../helper/assert/not-null';
 
 @Component({
@@ -9,30 +9,19 @@ import { NonNull } from '../../helper/assert/not-null';
   styleUrls: ['./klienten-uebersicht.component.scss']
 })
 export class KlientenUebersichtComponent implements OnInit {
-  readonly klienten$ = this._klientenFacade.alleKlienten$.pipe(
+  readonly klienten$ = this._klientenFacade.holeAlleKlienten$().pipe(
     map(klienten => Object.values(klienten).map(k => {
       NonNull(k);
       return k;
     }))
   );
 
-  storeObs$: any;
-
-  start = false;
+  start = true;
 
   constructor(private _klientenFacade: KlientenFacadeService) {
   }
 
   ngOnInit(): void {
-  }
-
-  startSub() {
-    this.start = true;
-    this.storeObs$ = this._klientenFacade.gibAlleKlienten$().pipe(
-      tap(klienten => {
-        console.warn('KK', klienten);
-      })
-    );
   }
 
   stopSub() {
