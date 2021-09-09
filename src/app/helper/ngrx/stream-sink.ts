@@ -47,11 +47,17 @@ export class StreamSink<TState = any> {
               private _firestore: AngularFirestore) {
   }
 
-  automatischerFirestoreStream<TStoreContract extends object, AC extends ActionCreator = ActionCreator>(action: AC, storePath: string): OperatorFunction<Action, TStoreContract[]> {
+  automatischerFirestoreStream<TStoreContract extends object, AC extends ActionCreator = ActionCreator>(
+    action: AC,
+    storePath: string
+  ): OperatorFunction<Action, TStoreContract[]> {
     return this.automatischerStream(action, this._firestore.collection<TStoreContract>(storePath).valueChanges());
   }
 
-  automatischerStream<AC extends ActionCreator, TStoreContract extends object>(action: AC, valueChangesObs$: Observable<TStoreContract[]>): OperatorFunction<Action, TStoreContract[]> {
+  automatischerStream<AC extends ActionCreator, TStoreContract extends object>(
+    action: AC,
+    valueChangesObs$: Observable<TStoreContract[]>
+  ): OperatorFunction<Action, TStoreContract[]> {
     return pipe(
       ofType(action),
       switchMap(() => valueChangesObs$.pipe(
