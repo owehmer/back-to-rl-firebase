@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { LandingPageComponent } from '../../landing-page/landing-page.component';
 import { LandingPageModule } from '../../landing-page/landing-page.module';
 import { MatCardModule } from '@angular/material/card';
-import { FirestoreDateModule } from '../../helper/date/firestore-date/firestore-date.module';
+import { FirestoreDateModule } from '../../helper/pipe/firestore-date/firestore-date.module';
 
 
 @NgModule({

@@ -1,0 +1,35 @@
+<mat-action-list>
+  <ng-container *ngFor="let group of eventGroups$ | async; trackBy: trackByGroupKey">
+    <h2 mat-subheader>{{group.key | statusToInfotext}}</h2>
+
+    <mat-list-item *ngFor="let event of group.events | sortByStatus; trackBy: trackByItemId"
+                   class="event-list-item"
+                   (click)="setNextStatus(event)"
+    >
+      <span mat-list-icon class="cdk-visually-hidden">Status: {{event.status | statusToInfotext}}</span>
+      <mat-icon mat-list-icon
+                [style.color]="event.status | statusToColor"
+                [matTooltip]="event.status | statusToInfotext"
+      >
+        {{event.status | statusToIcon}}
+      </mat-icon>
+
+      <div mat-line class="event-list-item__top-line">
+        <div>
+          {{event.name}}
+        </div>
+
+        <div class="secondary-text">
+          {{event.attendingUser.length}}
+          / {{event.maxAttendingUser}}
+          <span class="article-count__suffix">&nbsp;{{event.maxAttendingUser | i18nPlural : eventUserMapping}}</span>
+        </div>
+      </div>
+
+      <div mat-line class="secondary-text">
+        {{event.startTime | firestoreDate : 'mediumDate'}}
+        {{event.startTime | firestoreDate : 'shortTime'}}
+      </div>
+    </mat-list-item>
+  </ng-container>
+</mat-action-list>

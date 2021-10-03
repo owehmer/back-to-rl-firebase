@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.mat-action-list {
+  h2 {
+    $matToolbarHeight: 48px;
+
+    position: sticky;
+    top: $matToolbarHeight + 8px;
+    z-index: 1;
+    background-color: #FFFFFF;
+
+    &:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+}
+
+.mat-list-base .mat-list-item .mat-line.event-list-item__top-line {
+  display: flex;
+
+  & > div:first-child {
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  & > div:last-child {
+    font-size: 14px;
+  }
+}
+

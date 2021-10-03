@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-pickjob-uebersicht',
+  selector: 'app-events-uebersicht',
   templateUrl: './events-overview.component.html',
   styleUrls: ['./events-overview.component.scss']
 })
