@@ -13,15 +13,8 @@ export interface KlientState extends EntityState<IKlient> {
 export const adapter: EntityAdapter<IKlient> = createEntityAdapter<IKlient>();
 
 export const initialState: KlientState = adapter.getInitialState({
-  entities: {
-    '1': {
-      id: '1',
-      geburtsdatum: new Date(),
-      name: 'test',
-      vorname: 'asd'
-    },
-  },
-  ids: ['1']
+  entities: {},
+  ids: []
 });
 
 
