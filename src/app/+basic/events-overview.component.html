@@ -1,0 +1,7 @@
+<app-toolbar>Events overview</app-toolbar>
+
+<app-events-list *ngIf="isSmallBreakpoint$ | async; else largeScreenList"></app-events-list>
+
+<ng-template #largeScreenList>
+  <app-events-expansion-list></app-events-expansion-list>
+</ng-template>

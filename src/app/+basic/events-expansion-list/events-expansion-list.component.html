@@ -1,0 +1,48 @@
+<mat-accordion *ngFor="let group of eventGroups$ | async; trackBy: trackByGroupKey" [multi]="true">
+
+  <mat-expansion-panel *ngFor="let event of group.events; trackBy: trackByEventId" #panel hideToggle>
+    <mat-expansion-panel-header
+      collapsedHeight="70px"
+      expandedHeight="70px"
+      class="event-panel-header"
+      [style.border-left-color]="event.status | statusToColor"
+      (click)="panelHeaderClicked(panel, event)"
+    >
+      <mat-panel-title class="panel-title">
+        <div class="panel-title__status" [style.color]="event.status | statusToColor">
+          <span class="cdk-visually-hidden">Status: {{event.status | statusToInfotext}}</span>
+          <mat-icon [matTooltip]="event.status | statusToInfotext">{{event.status | statusToIcon}}</mat-icon>
+        </div>
+
+        <div class="panel-title__user-count">
+          {{event.attendingUser.length}}
+          / {{event.maxAttendingUser}}
+          <span class="user-count__suffix">&nbsp;{{event.maxAttendingUser | i18nPlural : eventUserMapping}}</span>
+        </div>
+      </mat-panel-title>
+
+      <mat-panel-description class="panel-description">
+        <div class="panel-description__date-col">
+          <div class="target-time">
+            <mat-icon [inline]="true">schedule</mat-icon>
+            <span>
+              {{event.startTime | firestoreDate : 'mediumDate'}}
+              {{event.startTime | firestoreDate : 'shortTime'}}
+            </span>
+          </div>
+        </div>
+
+        <div class="panel-description__id-col">{{event.id}}</div>
+
+        <span class="mat-expansion-indicator custom-indicator"
+              [class.custom-indicator--rotate]="panel.expanded"
+              (click)="matExpansionToggle(panel, $event)"
+        ></span>
+
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+  </mat-expansion-panel>
+
+</mat-accordion>
