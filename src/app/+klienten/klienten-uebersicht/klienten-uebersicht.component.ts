@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KlientenFacadeService } from '../state/klienten.facade.service';
 import { map } from 'rxjs/operators';
-import { NonNull } from '../../helper/assert/not-null';
+import { AssertNonNull } from '../../helper/assert/not-null';
 
 @Component({
   selector: 'app-klienten-uebersicht',
@@ -11,7 +11,7 @@ import { NonNull } from '../../helper/assert/not-null';
 export class KlientenUebersichtComponent implements OnInit {
   readonly klienten$ = this._klientenFacade.holeAlleKlienten$().pipe(
     map(klienten => Object.values(klienten).map(k => {
-      NonNull(k);
+      AssertNonNull(k);
       return k;
     }))
   );

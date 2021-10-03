@@ -9,13 +9,16 @@ import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { EntityDataModule } from '@ngrx/data';
-import { entityConfig } from './entity-metadata';
 import { RouterModule } from '@angular/router';
 import { AppRoutesModule } from './app-routes.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PERSISTENCE } from '@angular/fire/compat/auth';
-import { KlientenStateModule } from './+klienten/state/klienten-state.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthService } from './auth/auth.service';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
+import { HttpAuthInterceptor } from './helper/interceptor/http-auth.interceptor';
+import { HttpErrorMessageInterceptor } from './helper/interceptor/http-error-message-interceptor';
+import { BASIC_ROUTE_PATH, PATH_AFTER_LOGIN_TOKEN } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -34,13 +37,21 @@ import { KlientenStateModule } from './+klienten/state/klienten-state.module';
       logOnly: environment.production, // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
-    EntityDataModule.forRoot(entityConfig),
-    RouterModule,
     AppRoutesModule,
-    KlientenStateModule
+    RouterModule,
+    MatSnackBarModule
   ],
   providers: [
+    AuthService,
     { provide: PERSISTENCE, useValue: 'local' },
+    { provide: PATH_AFTER_LOGIN_TOKEN, useValue: BASIC_ROUTE_PATH },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {
+        appearance: 'outline'
+      } as MatFormFieldDefaultOptions
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorMessageInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">Simple app</mat-toolbar>
+
+<div class="login-container-center-wrapper">
+  <div class="login-container">
+    <mat-progress-bar *ngIf="isLoggingIn" mode="indeterminate" class="login-progress-bar"></mat-progress-bar>
+
+    <div class="login-container__logo">
+      <mat-icon [style.width.px]="175"
+                [style.font-size.px]="100"
+                [style.color]="'#4051b5'">broken_image
+      </mat-icon>
+    </div>
+
+    <h1 class="login-container__headline">Login</h1>
+
+
+    <form [formGroup]="form" class="login-form">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+
+        <mat-error *ngIf="form.controls.email.hasError('credentials')">
+          {{form.controls.email.getError('credentials')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+
+      <div class="login-form__action-area">
+        <button mat-flat-button color="primary" (click)="login()">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <span class="toolbar__title">
+    <ng-content></ng-content>
+  </span>
+
+  <div *ngIf="showUser && (user$ |async) as user"
+       [matMenuTriggerFor]="menu"
+       class="toolbar__user-wrapper clickable"
+  >
+    <span *ngIf="(isSmallBreakpoint$ | async) === false"
+          class="toolbar__user-wrapper__name"
+    >
+      {{user.displayName}}
+    </span>
+
+    <img *ngIf="user.photoURL" alt="User portrait" [src]="user.photoURL"/>
+    <mat-icon *ngIf="!user.photoURL">account_circle</mat-icon>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

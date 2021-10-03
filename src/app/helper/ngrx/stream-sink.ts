@@ -1,6 +1,6 @@
 import { Dictionary } from '@ngrx/entity';
 import { Observable, OperatorFunction, pipe, Subject } from 'rxjs';
-import { NonNull } from '../assert/not-null';
+import { AssertNonNull } from '../assert/not-null';
 import { ActionCreator, Selector, Store } from '@ngrx/store';
 import { Action } from 'ts-action';
 import { Injectable } from '@angular/core';
@@ -81,7 +81,7 @@ export class StreamSink<TState = any> {
 
   stoppeStream(name: string) {
     const selektorData = this._selektorMetas[name];
-    NonNull(selektorData);
+    AssertNonNull(selektorData);
 
     selektorData.stoppeListener();
     if (selektorData.anzahlListener === 0) {
@@ -96,7 +96,7 @@ export class StreamSink<TState = any> {
   private _holeDestroyedObs$(actionName: string): Observable<void> {
     const selektorMeta = this._selektorMetas[actionName];
 
-    NonNull(selektorMeta, 'Ein Service muss die Sink erst erstellen, bevor sie in dem Effect genutzt werden kann!');
+    AssertNonNull(selektorMeta, 'Ein Service muss die Sink erst erstellen, bevor sie in dem Effect genutzt werden kann!');
 
     return selektorMeta.destroyed$;
   }
@@ -113,7 +113,7 @@ export class StreamSink<TState = any> {
     }
 
     const selektor = this._selektorMetas[name];
-    NonNull(selektor);
+    AssertNonNull(selektor);
 
     return selektor;
   }
