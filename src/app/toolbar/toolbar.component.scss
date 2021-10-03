@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.toolbar__title {
+  flex: 1;
+}
+
+.toolbar__user-wrapper {
+  --toolbar-user-size: 40px;
+
+  display: flex;
+  justify-content: flex-end;
+  width: var(--toolbar-user-size);
+
+  @media (min-width: 600px) {
+    width: auto;
+  }
+
+  &:hover {
+    //background-color: red;
+  }
+
+  &__name {
+    line-height: var(--toolbar-user-size);
+    margin-right: 8px;
+  }
+
+  & > .mat-icon, & > img {
+    width: var(--toolbar-user-size);
+    height: var(--toolbar-user-size);
+    font-size: var(--toolbar-user-size);
+  }
+
+  & > img {
+    border-radius: 50%;
+  }
+}
